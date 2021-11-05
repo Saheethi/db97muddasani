@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to the Fan pug
+  div(class="container-fluid")
+        div(class="row")
+            -
+                let fans = [
+                    {
+                        "brand": "Prominence",
+                        "types": "Ceiling",
+                        "cost": "Eighty USD"
+                    },
+                    {
+                        "brand": "Minka",
+                        "types": "Table",
+                        "cost": "Seven hundred USD"
+                    },
+                    {
+                        "brand": "Black Jack",
+                        "types": "Exhaust",
+                        "cost": "Five hundred USD"
+                    },                   
+                ]
+            each x,index in fans 
+                div(class="col-sm-2" onclick=`buy(${index})`) #{x.brand}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{x.types}
+                div(class="col-sm-2" onclick=`buy(${index})`) #{x.cost}
+  script.                
+    function buy(product)
+    {
+        alert(`You Purchased Item ${product+1}`)
+    }
