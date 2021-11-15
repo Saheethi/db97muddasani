@@ -7,10 +7,24 @@ res.send(thefan);
 res.status(500);
 res.send(`{"error": ${err}}`);
 }
-};// for a specific Costume.
-exports.fan_detail = function (req, res) {
-res.send("NOT IMPLEMENTED: fan detail: " + req.params.id);
-};// Handle Costume create on POST.
+};
+
+// for a specific Costume. 
+exports.fan_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await fan.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
+}; 
+
+
+
+
+// Handle Costume create on POST.
 exports.fan_create_post = async function (req, res) {
 console.log(req.body);
 let document = new fan();
@@ -27,10 +41,28 @@ res.send(`{"error": ${err}}`);
 };// Handle Costume delete form on DELETE.
 exports.fan_delete = function (req, res) {
 res.send("NOT IMPLEMENTED: fan delete DELETE " + req.params.id);
-};// Handle Costume update form on PUT.
-exports.fan_update_put = function (req, res) {
-res.send("NOT IMPLEMENTED: fan update PUT" + req.params.id);
-};// VIEWS
+};
+ //Handle Costume update form on PUT. 
+exports.fan_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await fan.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.fan_type)  
+               toUpdate.fan_type = req.body.fan_type; 
+        if(req.body.cost) toUpdate.cost = req.body.cost; 
+        if(req.body.size) toUpdate.size = req.body.size; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
+}; 
+// VIEWS
 // Handle a show all view
 exports.fan_view_all_Page = async function (req, res) {
 try {

@@ -80,7 +80,7 @@ app.use('/users', usersRouter);
 app.use('/fan', fanRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
-app.use('/fanmodel',fan);
+//app.use('/fanmodel',fan);
 app.use('/resource',resourceRouter);
 
 
