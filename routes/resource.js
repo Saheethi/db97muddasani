@@ -6,6 +6,7 @@ var api_controller = require('../controllers/api');
 var fan_controller = require('../controllers/fan'); 
  
 /// API ROUTE /// 
+
  
 // GET resources base. 
 router.get('/', api_controller.api); 
