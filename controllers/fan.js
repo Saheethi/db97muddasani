@@ -1,4 +1,6 @@
-var fan = require("../models/fan");// List of all Costumes
+var fan = require("../models/fan");
+
+// List of all fans
 exports.fan_list = async function (req, res) {
 try {
 thefan = await fan.find();
@@ -9,7 +11,7 @@ res.send(`{"error": ${err}}`);
 }
 };
 
-// for a specific Costume. 
+// for a specific fan. 
 exports.fan_detail = async function(req, res) { 
     console.log("detail"  + req.params.id) 
     try { 
@@ -24,7 +26,7 @@ exports.fan_detail = async function(req, res) {
 
 
 
-// Handle Costume create on POST.
+// Handle fan create on POST.
 exports.fan_create_post = async function (req, res) {
 console.log(req.body);
 let document = new fan();
@@ -39,7 +41,7 @@ res.status(500);
 res.send(`{"error": ${err}}`);
 }
 };
-// Handle Costume delete on DELETE. 
+// Handle fan delete on DELETE. 
 exports.fan_delete = async function(req, res) { 
     console.log("delete "  + req.params.id) 
     try { 
@@ -53,7 +55,7 @@ exports.fan_delete = async function(req, res) {
 }; 
 
 
- //Handle Costume update form on PUT. 
+ //Handle fan update form on PUT. 
 exports.fan_update_put = async function(req, res) { 
     console.log(`update on id ${req.params.id} with body 
 ${JSON.stringify(req.body)}`) 
@@ -73,11 +75,13 @@ ${JSON.stringify(req.body)}`)
 failed`); 
     } 
 }; 
+
+
 // VIEWS
 // Handle a show all view
 exports.fan_view_all_Page = async function (req, res) {
 try {
-thefan = await Costume.find();
+thefan = await fan.find();
 res.render("fan", { title: "fan Search Results", results: thefan });
 } catch (err) {
 res.status(500);
@@ -85,48 +89,17 @@ res.send(`{"error": ${err}}`);
 }
 };
 
-/*
-
-
-
-
-var fan = require('../models/fan'); 
-
-
-
-// List of all Costumes 
-exports.costume_list = async function(req, res) { 
+// Handle a show one view with id specified by query 
+exports.fan_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
     try{ 
-        theCostumes = await Costume.find(); 
-        res.send(TheFans); 
+        result = await fan.findById( req.query.id) 
+        res.render('fandetail',  
+        { title: 'fan Detail', toShow: result }); 
     } 
     catch(err){ 
-        res.status(500); 
-        res.send(`{"error": ${err}}`); 
-    }   
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
 }; 
- 
-// List of all Costumes 
-//exports.costume_list = function(req, res) { 
-    //res.send('NOT IMPLEMENTED: Costume list'); 
-//}; 
- 
-// for a specific Costume. 
-exports.costume_detail = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Fan detail: ' + req.params.id); 
-}; 
- 
-// Handle Costume create on POST. 
-exports.costume_create_post = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Fan create POST'); 
-}; 
- 
-// Handle Costume delete form on DELETE. 
-exports.costume_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Fan delete DELETE ' + req.params.id); 
-}; 
- 
-// Handle Costume update form on PUT. 
-exports.costume_update_put = function(req, res) { 
-    res.send('NOT IMPLEMENTED: Fan update PUT' + req.params.id); 
-};*/
+

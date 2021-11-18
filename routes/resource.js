@@ -7,6 +7,9 @@ var fan_controller = require('../controllers/fan');
  
 /// API ROUTE /// 
 
+/* GET detail fan page */ 
+//router.get('/detail', fan_controller.fan_view_one_Page); 
+ 
  
 // GET resources base. 
 router.get('/', api_controller.api); 
