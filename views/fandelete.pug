@@ -9,18 +9,18 @@ block content
   - let fanid = toShow._id 
   - let fanbrand = toShow.brand
   - let fan_type = toShow.types 
-  - let fancost = toShow.cost  
+  - let fancost = toShow.cost 
   - let actionid = "/resource/fans/" + fanid 
     script let actionid = "#{actionid}" 
     div 
       div.row 
         div(class='fanAttr mr-3') fan ID is: 
-        div #{fanid}  
+        div #{fanid} 
       div.row 
         div(class='fanAttr mr-3') fan Brand is: 
         div #{fanbrand} 
       div.row 
-        div(class='fanAttr mr-3') fan Type is: 
+        div(class='fanAttr mr-3') fan type is: 
         div #{fan_type} 
       div.row 
         div(class='fanAttr mr-3') fan Cost is: 
@@ -31,7 +31,7 @@ block content
  
   script. 
     function cancel() { 
-      //Go back to the home page for the fan collection 
+      // Go back to the home page for the fan collection 
       window.location.href='/fans' 
     } 
   script. 
@@ -45,10 +45,10 @@ block content
         return resp.json(); // or resp.text() or whatever the server sends 
       }).then((body) => { 
         alert("Delete succeded") 
-        window.location.href='/costumes' 
+        window.location.href='/fans' 
         // TODO handle body 
       }).catch((error) => { 
         // TODO handle error 
         alert("Delete failed " + error ) 
       }); 
-    }  
+    } 
