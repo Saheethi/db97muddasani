@@ -4,7 +4,7 @@ block content
   h1= title
   p Welcome to the Fan pug
   div(class="container-fluid")
-        div(class="row")
+        div(class="row" m-1)
             -
                 let fans = [
                     {
@@ -24,11 +24,17 @@ block content
                     },                   
                 ]
             each x,index in fans 
+                - let destination = `dispatch(\"/fan/update?id=${x._id}\")` 
                 div(class="col-sm-2" onclick=`buy(${index})`) #{x.brand}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{x.types}
                 div(class="col-sm-2" onclick=`buy(${index})`) #{x.cost}
+                button.btn( class="btn-primary ml-1", onclick= destination) Update 
   script.                
     function buy(product)
     {
         alert(`You Purchased Item ${product+1}`)
-    }
+    } 
+    function dispatch(path){           
+      window.location.href=path 
+    
+    } 
