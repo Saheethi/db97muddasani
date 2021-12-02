@@ -1,6 +1,9 @@
 const mongoose = require("mongoose") 
 const fanSchema = mongoose.Schema({ 
- brand: String, 
+    brand: {
+        type: String,
+        minlength: 4
+    },
  types: String, 
  cost: Number 
 }) 
